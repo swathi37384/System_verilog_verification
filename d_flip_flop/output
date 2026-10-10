@@ -1,0 +1,40 @@
+rst=0 d=100
+rst=0 d=000
+rst=0 d=011
+rst=0 d=110
+rst=0 d=011
+rst=1 d=101
+rst=0 d=000
+rst=1 d=001
+rst=0 d=110
+rst=0 d=010
+[DRV] rst=0 d=100
+[MON] rst=0 d=100 q=100 
+[scb] pass rst=0 d=100 q=100
+[DRV] rst=0 d=000
+[MON] rst=0 d=000 q=000 
+[scb] pass rst=0 d=000 q=000
+[DRV] rst=0 d=011
+[MON] rst=0 d=011 q=011 
+[scb] pass rst=0 d=011 q=011
+[DRV] rst=0 d=110
+[MON] rst=0 d=110 q=110 
+[scb] pass rst=0 d=110 q=110
+[DRV] rst=0 d=011
+[MON] rst=0 d=011 q=011 
+[scb] pass rst=0 d=011 q=011
+[DRV] rst=1 d=101
+[MON] rst=1 d=101 q=000 
+[scb] pass rst=1 d=101 q=000
+[DRV] rst=0 d=000
+[MON] rst=0 d=000 q=000 
+[scb] pass rst=0 d=000 q=000
+[DRV] rst=1 d=001
+[MON] rst=1 d=001 q=000 
+[scb] pass rst=1 d=001 q=000
+[DRV] rst=0 d=110
+[MON] rst=0 d=110 q=110 
+[scb] pass rst=0 d=110 q=110
+[DRV] rst=0 d=010
+[MON] rst=0 d=010 q=010 
+[scb] pass rst=0 d=010 q=010
