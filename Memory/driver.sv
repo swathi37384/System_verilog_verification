@@ -1,22 +1,28 @@
-class driver;
-  mailbox gen2driver;
-  transaction trans;
-  virtual intf vif;
+class driver ;
+	transaction trans;
+  	virtual intf vinf;
+  	mailbox mb_gen;
   
-  function new( mailbox gen2driver, virtual intf vif);
-    this.gen2driver=gen2driver;
-    this.vif=vif;
-    endfunction
+  function new( virtual intf vinf, mailbox mb_gen);
+    this.vinf 	= vinf;
+    this.mb_gen	= mb_gen;
+  endfunction
   
-  task run();
-    repeat(16)begin
+  task start();
+    repeat(30)
+    begin
       
-      gen2driver.get(trans);
-      @(negedge vif.clk);
-      vif.we=trans.we;
-      vif.addr=trans.addr;
-      vif.data_in=trans.data_in;
-      $display("[DRV]we=%b addr=%b data=%b",vif.we,vif.addr,vif.data_in);
+    mb_gen.get(trans);
+      
+   @(posedge vinf.clk)
+      
+    vinf.data_in 	= trans.data_in;
+    vinf.addr		= trans.addr;
+	    
+    trans.display("DRV");
+      
     end
+   
   endtask
 endclass
+    
