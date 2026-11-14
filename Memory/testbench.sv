@@ -1,4 +1,3 @@
-
 `include "interface.sv"
 `include "transaction.sv"
 `include "generator.sv"
@@ -8,22 +7,42 @@
 `include "agent.sv"
 `include "environment.sv"
 
-module testbench;
-   initial vif.clk=0;
-  always #5 vif.clk=~vif.clk;
-  intf vif();
-  
-  memory dut(vif);
+module tb;
+
+  bit clk;
+
+  always #5 clk = ~clk;
+
+  intf inf(clk);
+  sram uut(inf);
+
   environment env;
-  
+
   initial begin
-    vif.clk=0;
-    env=new(vif);
-    env.run();
+    env = new(inf);
+
+    #5;
+    inf.rst = 0;
+
+    #15;
+    inf.rst = 1;
+    inf.wr = 1;
+    inf.en = 1;
+
+    #180;
+    inf.wr = 0;
+    inf.en = 1;
+  end
+
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars;
+    #500;
     $finish;
   end
+
   initial begin
-    $dumpfile("d_ff.vcd");
-    $dumpvars;
+    env.run();
   end
+
 endmodule
