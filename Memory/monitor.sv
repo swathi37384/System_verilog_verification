@@ -1,28 +1,32 @@
-class monitor;
-  transaction trans;
-  mailbox mon2scb;
-  virtual intf vif;
+class monitor ;
+	virtual intf vinf;
+  	transaction trans;
+  	mailbox mb_drv;
   
-  function new(virtual intf vif,mailbox mon2scb);
-    this.vif=vif;
-    this.mon2scb=mon2scb;
+  function new( virtual intf vinf, mailbox mb_drv);
+    this.vinf 	= vinf;
+    this.mb_drv	= mb_drv;
   endfunction
   
-  task run();
-    @(posedge vif.clk);
-    
-    repeat(16)begin
-      @(posedge vif.clk);
-      #1;
-      trans=new();
-      trans.we=vif.we;
-      trans.addr=vif.addr;
-      trans.data_in=vif.data_in;
-      trans.data_out=vif.data_out;
-      mon2scb.put(trans);
-      
-      $display("[MON] we=%b addr=%b data_in=%b data_out=%b ",trans.we,trans.addr,trans.data_in,trans.data_out);
-    end
+  task start();
+    repeat(30)
+      begin
+        trans = new();
+        
+        @(posedge vinf.clk)
+		#1;        
+        trans.data_in 	= vinf.data_in;
+        trans.addr 	= vinf.addr;
+        trans.en	= vinf.en;
+        trans.wr	= vinf.wr;
+        trans.data_out	= vinf.data_out;
+        
+        mb_drv.put(trans);
+        trans.display("MON");
+        
+      end
   endtask
 endclass
-      
+        
+        
+    
