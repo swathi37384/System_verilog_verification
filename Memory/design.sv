@@ -1,9 +1,18 @@
-module memory(intf vif);
-  logic [3:0]mem[0:7];
-  always@(posedge vif.clk)begin
-  if(vif.we)
-    mem[vif.addr]<=vif.data_in;
-else
-  vif.data_out<=mem[vif.addr];
-end
+module sram(intf inf);
+
+  reg [3:0] mem [0:15];
+
+  always@(posedge inf.clk)
+	begin
+      	if(!inf.rst)
+        foreach(mem[i])
+          begin
+            mem[i] <= 4'h0;
+          end
+      	else if(inf.en && inf.wr)
+  		  	mem[inf.addr] <= inf.data_in;
+  		else if (inf.en && !inf.wr)
+			inf.data_out <= mem[inf.addr];
+	end
+
 endmodule
