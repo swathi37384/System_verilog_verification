@@ -1,0 +1,32 @@
+Loading snapshot worklib.async_fifo_tb:sv .................... Done
+SVSEED default: 1
+xcelium> source /xcelium25.03/tools/xcelium/files/xmsimrc
+xcelium> run
+WRITE STORED = 90
+WRITE STORED = 94
+WRITE STORED = 26
+WRITE STORED = 62
+WRITE STORED = 61
+WRITE STORED = 23
+WRITE STORED = 03
+WRITE STORED = 7a
+FULL CHECK PASS
+READ PASS: Expected=90 Actual=90
+READ PASS: Expected=94 Actual=94
+READ PASS: Expected=26 Actual=26
+READ PASS: Expected=62 Actual=62
+READ PASS: Expected=61 Actual=61
+READ PASS: Expected=23 Actual=23
+READ PASS: Expected=03 Actual=03
+READ PASS: Expected=7a Actual=7a
+EMPTY CHECK PASS
+----------------------------
+SIMULATION SUMMARY
+PASS COUNT = 10
+FAIL COUNT = 0
+----------------------------
+Simulation complete via $finish(1) at time 525 NS + 0
+./testbench.sv:70         $finish;
+xcelium> exit
+TOOL:	xrun	25.03-s001: Exiting on Nov 18, 2026 at 08:24:50 EST  (total: 00:00:01)
+Done
